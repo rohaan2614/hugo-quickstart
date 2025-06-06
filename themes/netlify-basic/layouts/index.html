@@ -32,10 +32,31 @@
 <script>
   window.addEventListener('DOMContentLoaded', () => {
     const urlParams = new URLSearchParams(window.location.search);
-    const prankParam = urlParams.get('dont_follow_link');
+    const prankParam = urlParams.get('dont_follow');
 
     if (prankParam === 'followed') {
-      alert("You couldn't resist not doing it, right?\nWell you gotta wait because this website isn't ready yet.");
+      const popup = document.createElement('div');
+      popup.style.position = 'fixed';
+      popup.style.top = '0';
+      popup.style.left = '0';
+      popup.style.width = '100vw';
+      popup.style.height = '100vh';
+      popup.style.background = 'rgba(0, 0, 0, 0.8)';
+      popup.style.display = 'flex';
+      popup.style.flexDirection = 'column';
+      popup.style.alignItems = 'center';
+      popup.style.justifyContent = 'center';
+      popup.style.zIndex = '9999';
+      popup.style.padding = '2rem';
+      popup.innerHTML = `
+        <div style="background: white; border-radius: 12px; padding: 2rem; max-width: 600px; text-align: center;">
+          <h2 style="margin-bottom: 1rem;">You couldn't resist not doing it, right?</h2>
+          <img src="/img/shouldnt-be-here.jpg" alt="meme" ... style="max-width: 100%; height: auto; border-radius: 8px;" />
+          <p style="margin-top: 1rem;">Well, you gotta wait — this website isn't ready yet 😈</p>
+          <button onclick="this.parentElement.parentElement.remove()" style="margin-top: 1.5rem; padding: 0.5rem 1rem; background: #333; color: white; border: none; border-radius: 6px; cursor: pointer;">Close</button>
+        </div>
+      `;
+      document.body.appendChild(popup);
     }
   });
 </script>
